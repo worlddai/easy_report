@@ -1,0 +1,60 @@
+.er-title-container {
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 15px;
+    font-family: SimHei;
+    font-weight: normal;
+    text-indent: 12px;
+}
+
+.text-container {
+    word-break: break-all;
+    text-align: left;
+    /* margin-left: 16px; */
+    font-family: SimHei;
+    /* width: 710px; */
+	font-size: 14px;
+	/* width:100%; */
+
+}
+
+.text-container.indent {
+    text-indent: 2em;
+}
+
+.text-container.text-padding {
+    padding-left: 2em;
+    /* width:675px */
+}
+.img_parent{
+	/*position: relative;	*/
+	float:left;
+}
+.img-tips{
+	text-align: center;
+
+}
+.ctable-wapper {}
+
+.c-table {
+    table-layout: fixed;
+    
+    border:solid black; border-width:1px 0px 0px 1px;
+
+    border-spacing: 0;
+
+}
+
+.c-table td {
+
+	word-wrap: break-word;
+
+    border:solid black; border-width:0px 1px 1px 0px;
+
+    font-size:15px;
+    font-family:SimHei;
+    
+
+}

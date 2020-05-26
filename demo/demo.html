@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>EasyReport demo</title>
+
+    <link rel="stylesheet" type="text/css" href="../dist/main.css" />
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../dist/EasyReport.js"></script>
+
+    <style>
+        html,
+        body,
+        #map {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <h3>EasyReport是什么？--只要定义一个宽高的容器，和一个json串。自动实现文字，标题，图片，表格（多维表格）的自动分页，</h3>
+    <div style="width: 10000px;" class = "demo-container" id="er-container-font">
+
+    </div>
+    <span>宽度</span><input id="input-width" value="500"></input>
+    <span>高度</span><input id="input-height" value="500"></input>
+    <button onclick="beginDemo1()">试试我！</button>
+    <h3>当然。多个容器也可以同时存在：</h3>
+
+    <h6>300*300</h6>
+    <div style="width: 10000px;float:left" class = "demo-container" id="er-container-font-1">
+
+    </div>
+    <h6>200*200</h6>
+    <div style="width: 10000px;float:left" class = "demo-container" id="er-container-font-2">
+
+    </div>
+    <button onclick="beginDemo2()">试试我！</button>
+    <script type="text/javascript">
+
+        function getDataSource() {
+            var ctable_data = '{"rows":[{"text":"类型","options":{"align":"center"},"children":[{"text":"项目","options":{"align":"center"},"children":[{"text":"指标","options":{"align":"center"},"children":[{"text":"检验方法","options":{"align":"center"},"children":[{"text":"检验形式","options":{"align":"center"}}]}]}]}]},{"text":"材质要求","options":{"align":"center"},"children":[{"text":"纸材","options":{"align":"center"},"children":[{"text":"由外及内共六层：PE（LDPE），纸层，PE（LDPE），铝箔，塑料Ⅰ（粘合树脂），塑料Ⅱ（LDPE）","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"}}]}]}]},{"text":"盖","options":{"align":"center"},"children":[{"text":"PE/PP（绿色、白色）","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"}}]}]}]},{"text":"MPM密封条","options":{"align":"center"},"children":[{"text":"（万封）7层共挤复合膜：MLLDPE，LDPE，Primer，PET，Primer，LDPE，mLLDPE","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"}}]}]}]},{"text":"贴盖胶","options":{"align":"center"},"children":[{"text":"德国胶王250.00","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"}}]}]}]}]},{"text":"纸材基础尺寸","options":{"align":"center"},"children":[{"text":"展开纸幅长度偏差（mm）","options":{"align":"center"},"children":[{"text":"（依附件1规格）270±0.3","options":{"align":"center"},"children":[{"text":"游标卡尺精度0.1mm","options":{"align":"center"},"children":[{"text":"★/☆","options":{"align":"center"}}]}]}]},{"text":"展开纸幅宽度偏差（mm）","options":{"align":"center"},"children":[{"text":"（依附件1规格）305±1","options":{"align":"center"},"children":[{"text":"游标卡尺精度0.1mm","options":{"align":"center"},"children":[{"text":"★/☆","options":{"align":"center"}}]}]}]},{"text":"切边到第一竖直压痕线的距离（mm）","options":{"align":"center"},"children":[{"text":"（依附件1规格）49±1","options":{"align":"center"},"children":[{"text":"游标卡尺精度0.1mm","options":{"align":"center"},"children":[{"text":"★/☆","options":{"align":"center"}}]}]}]}]},{"text":"盖基础尺寸","options":{"align":"center"},"children":[{"text":"盖","options":{"align":"center"},"children":[{"text":"（依附件2规格）±0.2","options":{"align":"center"},"children":[{"text":"游标卡尺精度0.1mm","options":{"align":"center"},"children":[{"text":"★/☆","options":{"align":"center"}}]}]}]}]},{"text":"MPM密封条基础尺寸","options":{"align":"center"},"children":[{"text":"宽度（mm）","options":{"align":"center"},"children":[{"text":"7.5±0.2","options":{"align":"center"},"children":[{"text":"游标卡尺精度0.1mm","options":{"align":"center"},"children":[{"text":"★/☆","options":{"align":"center"}}]}]}]},{"text":"厚度（μm）","options":{"align":"center"},"children":[{"text":"80±5","options":{"align":"center"},"children":[{"text":"测厚仪精度1μm","options":{"align":"center"},"children":[{"text":"★/☆","options":{"align":"center"}}]}]}]}]},{"text":"包装完整性","options":{"align":"center"},"children":[{"text":"角漏检测","options":{"align":"center"},"children":[{"text":"不得检出漏包","options":{"align":"center"},"children":[{"text":"罗丹明溶液","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]},{"text":"气隙注射","options":{"align":"center"},"children":[{"text":"气隙两侧无渗漏。渗漏小于MPM条宽度1/3，可接受，制造需调整","options":{"align":"center"},"children":[{"text":"罗丹明溶液","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]},{"text":"剥包实验","options":{"align":"center"},"children":[{"text":"横封应封合平滑，加热区规整，没有可见的破裂。","options":{"align":"center"},"children":[{"text":"TB工字实验和横封溶解实验","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]}]},{"text":"封合性","options":{"align":"center"},"children":[{"text":"纵封","options":{"align":"center"},"children":[{"text":"不得检出封合不良","options":{"align":"center"},"children":[{"text":"拉起MPM条","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]},{"text":"横封","options":{"align":"center"},"children":[{"text":"不得检出封合不良","options":{"align":"center"},"children":[{"text":"横封钳撕开","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]}]},{"text":"贴盖完整性","options":{"align":"center"},"children":[{"text":"贴盖位置和开启性","options":{"align":"center"},"children":[{"text":"盖子边缘与盒顶边缘瓶型，开启后吸孔处薄膜切断","options":{"align":"center"},"children":[{"text":"目测和人工开启","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]},{"text":"贴盖牢固性","options":{"align":"center"},"children":[{"text":"盖子不可出现粘贴不牢导致盖脱落","options":{"align":"center"},"children":[{"text":"目测和人工开启","options":{"align":"center"},"children":[{"text":"★","options":{"align":"center"}}]}]}]}]},{"text":"包装","options":{"align":"center"},"children":[{"text":"纸材","options":{"align":"center"},"children":[{"text":"7000包/卷，每卷用PE收缩膜密封包裹。","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"}}]}]}]},{"text":"盖","options":{"align":"center"},"children":[{"text":"5000个/箱，每箱用PE内膜袋包装后装箱","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"},"children":[{"text":"——","options":{"align":"center"}}]}]}]}]},{"text":"供应商","options":{"align":"center"},"children":[{"text":"供应商","options":{"align":"center"},"children":[{"text":"碧海包装","options":{"align":"center"},"children":[]}]}]}],"size":[0.2,0.2,0.2,0.2,0.2],"type":"ctable"}'
+            var data_source = [
+                {
+                    "type": "title",
+                    "value": "文章描述"
+                }, 
+                {
+                    "type": "font",
+                    "value": "这是一篇记叙文章。讲述了二战时期的一个狙击手的故事"
+                }, 
+                {
+                    "type": "title",
+                    "value": "文章详情"
+                },
+                
+                 {
+                    "type": "font",
+                    "value": "1942年冬,斯大林格勒进入最后的巷战。苏联狙击手在废墟中神出鬼没,让德国人大为头疼。作为苏联“神鹰狙击队”的队长,瓦西里曾多次率领队友,出色地完成狙击任务。但这一次,他接到的命令是“炸毁第聂伯河上的大桥”,这意味着他们要深入敌占区!瓦西里嗅到了危险的气息。 　　神鹰狙击队乘坐的运输机在夜色中悄然飞向第聂伯河上空。十二条人影从天而降,如猛虎一般冲向德国人的桥头碉堡。“口令!”话音未落,两柄飞刀同时射入两名哨兵的咽喉。紧接着,瓦西里猛然撞开了碉堡的门。七名德国守兵还没反应过来就断了气,他们死也没想到这里居然会出现敌人。 　　队员伊万和卡宾拎着炸药箱乘上河边的汽艇,全速向主桥墩开去。瓦西里调高碉堡探照灯的角度,照向桥墩。 　　时间一分一秒地过去,瓦西里紧张地盯着河心。突然,刺耳的警报声响起,大桥另一端的德国守军发现情况有异,军营里骚动起来。 　　瓦西里果断下令:“向敌营开炮。”碉堡里两门火炮掉转方向瞄准军营,“轰!”炮弹击中了营房。德军也开炮还击。顿时,震耳欲聋的爆炸声响个不停,碉堡被炸塌了一角。 　　伊万和卡宾从河边冲上岸来,大叫:“一切顺利,三分钟后爆炸。”瓦西里立刻指挥大家撤退,一行人奔出了碉堡。“轰”的一声,碉堡已被猛烈的炮火炸塌。紧跟着又是一声巨响,火光冲天,大桥被炸断了。 　　神鹰队员钻进密林,在夜幕的掩护下急行三十里,终于摆脱了敌人的追击,来到一片沼泽地前。瓦西里掏出军用地图研究了一番,对大家说:“这片沼泽地对面有一片红树林,树林后面是一个大沼泽,穿过那里就进入了我们的控制范围。因为机械化部队没法通过大沼泽,双方都没有在这里大规模布防。但是大家仍要小心!” 　　神鹰队员们用木棍在泥地里探着路,足足走了两个小时才看见了远处的红树林,而此刻,大家都已筋疲力尽。 　　离红树林还有五十米远,可以看到清晨的阳光洒落林中,格外美丽。突然间,那树林里像是有一面小镜子反了一下光。“卧倒!”瓦西里大喝一声,队员神速卧倒,有两人却晚了半步。只听“砰砰”两声枪响,两人头部中弹,倒了下去。瓦西里“嗖”地向前掷出一颗烟雾弹,黑烟在树林边上弥漫开来。队员们紧随瓦西里,从烟雾中冲进了红树林。 　　“是德国狙击手,大家散开!”瓦西里冷静地下了命令。只一眨眼的工夫,密林中就响起了震耳的枪声,队员们和敌人交上了火。狙击手都是神枪手,决不浪费一颗子弹,每开一枪,几乎就有一条生命宣告结束! 　　不一会儿,瓦西里就干掉了九个隐藏的敌人。他屏住呼吸,小心地移动着,观察着敌情。直觉告诉他,头顶有一支枪正向他瞄准,他急忙侧翻出去,躲在另一棵树后。“砰”的一声,刚才靠着的树干上多了个弹洞,附近的树梢上有亮光一闪,瓦西里知道那是敌人正在调整反光镜。他向着闪光处开了一枪,击碎了反光镜,可敌人不动声色,冷静得可怕。 　　瓦西里果断地将最后一颗烟雾弹扔了出去,烟雾升腾中他滚翻到敌人藏身的树下,选了一个隐蔽的角度,举起枪静静等待黑烟消退。 　　浓烟渐渐散去,瓦西里猛然发现树上那支枪正瞄向自己的额头,敌人的判断很准确,他猜到自己要冲到树下!可惜他晚了半步。瓦西里扣动了扳机,打中他的右眼,那人从树上倒栽了下来。 　　枪声越来越稀疏,渐渐归于寂静。敌人尸横遍地,神鹰队员也倒下了八个,只有伊万还生死未卜!就在此时,树林深处接连传来两声枪响。瓦西里心头一紧,循着枪声快步摸去。没错,是伊万!他躺在血泊中,胸口中了一枪。 　　“伊万,挺住,你一定要挺住!”瓦西里的眼里涌出了热泪。伊万艰难地睁开眼,断断续续地说:“他……他是一头沉默的……狼,你千万要……要……小心!”瓦西里含泪点头,坚定地说:“放心,我会干掉他!”伊万笑了笑,说:“他受了伤,跑……跑不远。瓦西里,你是……最好的,我相信你!”伊万闭上了眼睛,他死了。 　　瓦西里循着草地上的一线血迹,悄然摸出了树林。外面是一座小石丘,只有几堆乱石,没有人影。 　　突然,瓦西里敏锐地捕捉到,一个微弱的光点正在他的太阳穴上晃动。他本能地弹身而起,向右侧一块巨石后面扑去。枪响了,他的左大腿一阵剧痛,已被子弹打穿。瓦西里躲在大石背后,疼得呼哧直喘。 　　凭着这一枪,瓦西里判断敌人藏在前方那块巨石后面,但从石缝中看过去,那人毫无动静。腿上血流如注,他只好取出止血药敷上,用绷带包扎好。然后忍着腿上的疼痛,抠去石缝里的泥土,挖出一个小洞,形成一个射击孔,凝神以待。 　　敌人躲在一块孤立的巨石后,瓦西里也一样,两人相距有五十米。瓦西里耐心地等待着,只要敌人离开那块石头,他就有把握将其击毙。 　　没想到敌人出奇的冷静,三个小时过去了仍然纹丝不动,就连一向以冷静著称的瓦西里都开始怀疑敌人是否还在那石头后面! 　　瓦西里从身上摸出一个小小的橡胶手套,吹成手掌那么大,绑在枪口上,让它像只真手一样在石头边上爬动。只听“砰”的一声,橡胶手套的两根手指被齐根打断。敌人枪法奇准,不但没走,还在时刻监视着他。 　　两人默默僵持着。瓦西里明白这回遇到了真正的狙击高手。 　　夜色降临,敌人没动,瓦西里也没动。他不敢合眼,牢牢地盯着那块巨石,可敌人就像死了一样毫无动静。 　　一天一夜过去,两个人仍在僵持。谁先从石头后走出来,就意味着选择死亡。 　　“轰隆隆!”天空乌云密布,电闪雷鸣,下起了瓢泼大雨,雨水淋在伤口上,刺痛难忍,瓦西里咬牙忍住。他相信敌人同样也在受着煎熬,只要那家伙忍不住就会悄悄摸上来,那就是他瓦西里唯一的机会了。但是,敌人仍然一动不动,就跟死了一样。瓦西里心中暗暗吃惊,这到底是怎样的一个敌人,竟有如此惊人的耐力!第二个夜晚又来临了,敌人仍是纹丝不动。瓦西里的信心开始动摇,一阵极度的疲惫感涌来。“不能睡!”他警告自己,然而眼皮子完全不听使唤。这时候,他的手无意中摸到了胸前,碰到一个硬东西。“丽莎!”他猛然惊醒,从怀里摸出一枚像章。尽管夜色下看不分明,丽莎却又出现在他的面前了,她俏生生地站在白桦树下,就像一朵美丽的郁金香……然而德国人的飞机来了,她的父母都死于轰炸,在那故乡的小河边,丽莎亲自为他戴上了这枚像章,送他上了战场。“瓦西里,活着回来。”她眼含热泪的嘱托就像烙铁一样烙在了他的心里。“为了丽莎,我要活着回去!”瓦西里心中涌起一股热流,顿时睡意全消。 　　他脱下衣服塞进钢盔,黑夜中看起来,钢盔就像一个人头,他将这“人头”绑在枪托上缓缓地从巨石背后探出,猛一下又缩回来,一连试探了三次,第四次,“人头”完全露在了石头外面。果然,对面的枪响了,钢盔被打出一个窟窿。瓦西里很快地发出了一声惨叫。 　　敌人并没有冲过来,仍是按兵不动。 　　太阳出来了,敌人还是没有出来,瓦西里已经有点沉不住气,这个德国佬实在太冷静了!他几乎忍不住想冲过去,看看敌人是不是在睡觉! 　　突然间,对面的大石后面探出一个人影!瓦西里的心一下提到了嗓子眼儿,他把枪口对着石缝瞄向了人影。“假人!”他吃了一惊,扣动扳机的手指猛然停住。那是一个非常逼真的头,然而以五十米的距离来说,这个头显得大了点。“假头”一连伸了五次,瓦西里一动不动。终于,从石头的另一侧缓缓探出一顶钢盔,一个人无声地站起,瓦西里毫不犹豫地扣动了扳机,那人直挺挺地倒下了。 　　瓦西里挺着枪走了过去。德国人脸色苍白地倒在地上,额头上被打出一个洞。瓦西里蹲下身,从德国人胸口摸出一张证件,上面写着:克尼格,党卫军上校,王牌狙击手。德国人手中握着一面镜框,镜框里是一个蓝眼睛的姑娘,面带微笑,站在清澈的小河边。瓦西里心中一阵刺痛,他想到了丽莎,也许这个德国姑娘,也像丽莎一样盼着她的心上人能活着回去!他终于明白,这个德国人为什么用惊人的毅力和他僵持了两天两夜!他的心里,该有多么强烈的求生欲望!然而命运却注定要让他永远留在这片土地上。 　　“你已经很努力了!”瓦西里轻轻地合上了德国人的眼睛,把镜框放在他的胸口上,站起身,敬了个军礼。这是一个值得尊敬的敌人!"
+                },
+                {
+                    "type": "ctable",
+                    "rows": JSON.parse(ctable_data).rows,
+                    "size": [0.2, 0.2, 0.2, 0.2, 0.2]
+                }
+                // {
+                //     "type": "img",
+                //     "value": [
+                //         {
+                //             "msg": "测试图例",
+                //             "url": "./images/duty.png",
+                //         },
+                //         {
+                //             "msg": "测试图例2",
+                //             "url": "./images/duty.png",
+                //         },
+                //         {
+                //             "msg": "",
+                //             "url": "./images/edit.png",
+                //         },
+                //         {
+                //             "msg": "",
+                //             "url": "./images/edit.png",
+                //         }
+                //         ,
+                //         {
+                //             "msg": "",
+                //             "url": "./images/edit.png",
+                //         },
+                //         {
+                //             "msg": "",
+                //             "url": "./images/edit.png",
+                //         }
+                //     ]
+                // }
+            ]
+                return data_source;
+
+        }
+
+       
+        function beginDemo2()
+        {
+            ER.getInstance('#er-container-font-1', {
+                width: 300,
+                height: 300,
+                onCreatePage: function (container) {
+                    container.css('float', 'left')
+                }
+            }).process(getDataSource());
+            ER.getInstance('#er-container-font-2', {
+                width: 200,
+                height: 200,
+                onCreatePage: function (container) {
+                    container.css('float', 'left')
+                }
+            }).process(getDataSource());
+        }
+        function beginDemo1() {
+            var width = $('#input-width').val();
+            var height = $('#input-height').val();
+
+            if(window.g_er)
+            {
+                g_er.destory();
+            }
+
+            
+            window.g_er = ER.getInstance('#er-container-font', {
+                width: parseInt(width),
+                height: parseInt(height),
+                onCreatePage: function (container) {
+                    container.css('float', 'left')
+                }
+            })
+           
+            g_er.process(getDataSource());
+        }
+
+
+    </script>
+</body>
+
+
+</html>
